@@ -10,13 +10,13 @@ export default function NotFound() {
         <p className="text-xs font-mono tracking-widest text-muted-foreground uppercase">
           404
         </p>
-        <h1 className="text-2xl font-semibold">ไม่พบห้องนี้</h1>
+        <h1 className="text-2xl font-semibold">เอ๊ะ! หาห้องนี้ไม่เจอแฮะ 🔍</h1>
         <p className="text-sm text-muted-foreground">
-          ห้องอาจหมดอายุแล้ว หรือรหัสอาจไม่ถูกต้อง
+          ห้องดนตรีนี้อาจจะหมดอายุ (24 ชม.) หรือพิมพ์รหัสผิดไปนิดนึง ลองเช็กดูอีกทีน้า
         </p>
       </div>
       <Button asChild variant="outline">
-        <Link href="/">กลับหน้าแรก</Link>
+        <Link href="/">กลับหน้าหลักกันเลย</Link>
       </Button>
     </div>
   )

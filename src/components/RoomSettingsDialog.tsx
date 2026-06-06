@@ -63,7 +63,7 @@ export function RoomSettingsDialog({
     const file = e.target.files?.[0];
     if (!file) return;
     if (!file.type.startsWith("image/")) {
-      toast.error("กรุณาเลือกไฟล์รูปภาพ");
+      toast.error("กรุณาเลือกเฉพาะไฟล์รูปภาพน้า 📸");
       return;
     }
     const reader = new FileReader();
@@ -97,7 +97,7 @@ export function RoomSettingsDialog({
 
   async function handleSave() {
     if ((bankName || bankAccount) && !bankAccountName.trim()) {
-      toast.error("กรุณาใส่ชื่อบัญชีธนาคาร");
+      toast.error("อย่าลืมกรอกชื่อบัญชีธนาคารให้ครบถ้วนด้วยนะจ๊ะ");
       return;
     }
     setIsSaving(true);
@@ -110,7 +110,7 @@ export function RoomSettingsDialog({
     });
     setIsSaving(false);
     if ("success" in result) {
-      toast.success("บันทึกการตั้งค่าแล้ว");
+      toast.success("เย้! บันทึกข้อมูลเรียบร้อยแล้ว ✨");
       setQrChanged(false);
       setOpen(false);
     } else {
@@ -133,10 +133,10 @@ export function RoomSettingsDialog({
       <DialogContent className="flex flex-col gap-5 p-6 max-w-sm bg-background/95 backdrop-blur border-border rounded-2xl">
         <DialogHeader>
           <DialogTitle className="text-base font-semibold">
-            ตั้งค่าห้อง
+            ตั้งค่าห้องเพลงของคุณ ⚙️
           </DialogTitle>
           <p className="text-xs text-muted-foreground">
-            ข้อมูลนักดนตรีและช่องทางรับเงิน
+            เพิ่มรายละเอียดนักดนตรีและช่องทางการสนับสนุน (ทิป)
           </p>
         </DialogHeader>
 
@@ -144,7 +144,7 @@ export function RoomSettingsDialog({
           {/* Musician name */}
           <div className="flex flex-col gap-1.5">
             <Label className="text-xs font-medium">
-              ชื่อนักดนตรี / วงดนตรี
+              ชื่อพี่นักดนตรี / ชื่อวง 🎸
             </Label>
             <Input
               placeholder="เช่น วง The Acoustic, DJ สมชาย"
@@ -159,10 +159,10 @@ export function RoomSettingsDialog({
           {/* Bank info */}
           <div className="flex flex-col gap-3">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              ข้อมูลบัญชีธนาคาร
+              ช่องทางการรับเงิน (ทิป)
             </p>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs font-medium">ธนาคาร</Label>
+              <Label className="text-xs font-medium">เลือกธนาคาร / พร้อมเพย์</Label>
               <Select value={bankName} onValueChange={setBankName}>
                 <SelectTrigger className="w-full h-9 text-sm">
                   <SelectValue placeholder="ธนาคาร" />
@@ -183,7 +183,7 @@ export function RoomSettingsDialog({
               </Select>
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs font-medium">เลขที่บัญชี</Label>
+              <Label className="text-xs font-medium">เลขบัญชี / เบอร์พร้อมเพย์</Label>
               <Input
                 placeholder="เช่น 123-4-56789-0"
                 value={bankAccount}
@@ -193,13 +193,13 @@ export function RoomSettingsDialog({
             </div>
             <div className="flex flex-col gap-1.5">
               <Label className="text-xs font-medium">
-                ชื่อบัญชี{" "}
+                ชื่อบัญชีผู้รับเงิน{" "}
                 {(bankName || bankAccount) && (
                   <span className="text-destructive">*</span>
                 )}
               </Label>
               <Input
-                placeholder="ชื่อ-นามสกุล เจ้าของบัญชี"
+                placeholder="กรอกชื่อ-นามสกุลผู้รับเงิน"
                 value={bankAccountName}
                 onChange={(e) => setBankAccountName(e.target.value)}
                 className="h-9 text-sm"
@@ -212,7 +212,7 @@ export function RoomSettingsDialog({
           {/* Payment QR */}
           <div className="flex flex-col gap-3">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              QR Code รับเงิน
+              รูป QR Code รับเงิน (เช่น พร้อมเพย์)
             </p>
             {paymentQr ? (
               <div className="flex flex-col gap-2 items-center">
@@ -232,7 +232,7 @@ export function RoomSettingsDialog({
                   onClick={handleRemoveQr}
                 >
                   <IconTrash className="w-3.5 h-3.5" />
-                  ลบ QR Code
+                  ลบรูป QR Code ออก 🗑️
                 </Button>
               </div>
             ) : (
@@ -242,9 +242,9 @@ export function RoomSettingsDialog({
                 className="flex flex-col items-center gap-2 py-6 border-2 border-dashed border-border rounded-xl text-muted-foreground hover:border-primary/40 hover:text-primary/60 transition-colors cursor-pointer"
               >
                 <IconUpload className="w-6 h-6" />
-                <span className="text-xs">คลิกเพื่ออัปโหลด QR Code</span>
+                <span className="text-xs">กดตรงนี้เพื่ออัปโหลดรูป QR Code รับเงิน 📸</span>
                 <span className="text-[10px] text-muted-foreground/60">
-                  PNG, JPG รองรับ
+                  รองรับไฟล์ PNG และ JPG จ้า
                 </span>
               </button>
             )}
@@ -263,7 +263,7 @@ export function RoomSettingsDialog({
           disabled={isSaving}
           className="w-full h-9 text-sm font-medium cursor-pointer"
         >
-          {isSaving ? "กำลังบันทึก..." : "บันทึก"}
+          {isSaving ? "กำลังบันทึกข้อมูล... 💾" : "บันทึกข้อมูล ✨"}
         </Button>
       </DialogContent>
     </Dialog>

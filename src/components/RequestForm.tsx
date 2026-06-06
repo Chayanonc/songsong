@@ -26,7 +26,7 @@ import {
 } from "@tabler/icons-react";
 
 const schema = z.object({
-  songName: z.string().min(1, "กรุณาใส่ชื่อเพลง"),
+  songName: z.string().min(1, "พิมพ์ชื่อเพลงที่อยากฟังหน่อยน้า 🎵"),
   bandName: z.string().optional(),
   customerName: z.string().optional(),
   tableNumber: z.string().optional(),
@@ -81,10 +81,10 @@ export function RequestForm({ roomCode }: RequestFormProps) {
         </div>
         <div className="space-y-2">
           <h2 className="text-xl font-bold tracking-tight">
-            ส่งคำขอเพลงเรียบร้อยแล้ว!
+            ส่งขอเพลงเรียบร้อยแล้วจ้า! 🎉
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            คำขอเพลงของคุณถูกส่งไปยังนักดนตรีแล้ว เตรียมรอฟังได้เลย
+            ส่งคำขอเพลงไปถึงพี่นักดนตรีแล้วนะจ๊ะ เตรียมตัวฟินและรอฟังได้เลย! 🎤
           </p>
         </div>
         <Button
@@ -96,7 +96,7 @@ export function RequestForm({ roomCode }: RequestFormProps) {
             form.reset();
           }}
         >
-          ขอเพลงเพิ่มอีก
+          ขอเพลงเพิ่มอีกสักเพลง 🎶
         </Button>
       </div>
     );
@@ -117,11 +117,11 @@ export function RequestForm({ roomCode }: RequestFormProps) {
               <FormItem>
                 <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                   <IconMusic className="w-3.5 h-3.5 text-primary" />
-                  ชื่อเพลง <span className="text-destructive">*</span>
+                  เพลงที่อยากฟัง 🎵 <span className="text-destructive">*</span>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="เช่น ดาวที่เหนือกว่า, สลักจิต"
+                    placeholder="เช่น วัดปะหล่ะ, เมษา"
                     {...field}
                     className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
                   />
@@ -138,14 +138,14 @@ export function RequestForm({ roomCode }: RequestFormProps) {
               <FormItem>
                 <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                   <IconMicrophone className="w-3.5 h-3.5 text-muted-foreground/70" />
-                  วง / ศิลปิน
+                  ชื่อนักร้อง / วงดนตรี 🎤
                   <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
                     (ถ้ามี)
                   </span>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="เช่น Bodyslam, Tilly Birds"
+                    placeholder="เช่น Three Man Down, Ink Waruntorn"
                     {...field}
                     className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
                   />
@@ -167,14 +167,14 @@ export function RequestForm({ roomCode }: RequestFormProps) {
               <FormItem>
                 <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                   <IconUser className="w-3.5 h-3.5 text-muted-foreground/70" />
-                  ชื่อผู้ขอ
+                  ชื่อเล่นคนขอ 👤
                   <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
                     (ไม่บังคับ)
                   </span>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="เช่น ชื่อเล่นของคุณ"
+                    placeholder="เช่น น้องส้ม, พี่เอก"
                     {...field}
                     className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
                   />
@@ -191,14 +191,14 @@ export function RequestForm({ roomCode }: RequestFormProps) {
               <FormItem>
                 <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                   <IconHash className="w-3.5 h-3.5 text-muted-foreground/70" />
-                  โต๊ะ
+                  เลขโต๊ะของคุณ 📍
                   <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
                     (ไม่บังคับ)
                   </span>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="เช่น A3, 12"
+                    placeholder="เช่น โต๊ะ 5, โต๊ะ VIP"
                     {...field}
                     className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
                   />
@@ -215,7 +215,7 @@ export function RequestForm({ roomCode }: RequestFormProps) {
               <FormItem>
                 <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                   <IconCoin className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500/10" />
-                  ทิปสนับสนุนนักดนตรี (บาท)
+                  ทิปเล็ก ๆ น้อย ๆ เพื่อสนับสนุนนักดนตรี (บาท) 💸
                   <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
                     (ไม่บังคับ)
                   </span>
@@ -226,7 +226,7 @@ export function RequestForm({ roomCode }: RequestFormProps) {
                       type="number"
                       min="0"
                       step="1"
-                      placeholder="ระบุจำนวนเงินที่ต้องการทิป"
+                      placeholder="ใส่จำนวนเงินที่ต้องการสนับสนุนจ้า"
                       {...field}
                       className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
                     />
@@ -279,8 +279,8 @@ export function RequestForm({ roomCode }: RequestFormProps) {
             className="w-full h-11 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/15 active:scale-98 mt-2"
           >
             {form.formState.isSubmitting
-              ? "กำลังส่งคำขอเพลง..."
-              : "ส่งคำขอเพลง"}
+              ? "กำลังส่งเพลงขอไปที่เวทีน้า... 🚀"
+              : "ส่งคำขอเพลงเลย! 🚀"}
           </Button>
           <Button
             variant="outline"
@@ -290,7 +290,7 @@ export function RequestForm({ roomCode }: RequestFormProps) {
             }}
             className="w-full h-11 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer shadow-sm"
           >
-            กลับหน้าแรก
+            กลับหน้าหลัก
           </Button>
         </div>
       </form>

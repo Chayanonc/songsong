@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SongSong",
-  description: "ระบบขอเพลงสำหรับนักดนตรีสด",
+  description: "ระบบขอเพลงน่ารัก ๆ สำหรับนักดนตรีสด ขอเพลงง่าย ได้ทันที! 🎶",
 };
 
 export default function RootLayout({

@@ -32,7 +32,7 @@ export function PaymentInfoCard({
     if (!bankAccount) return;
     navigator.clipboard.writeText(bankAccount);
     setCopied(true);
-    toast.success("คัดลอกเลขบัญชีเรียบร้อยแล้ว!");
+    toast.success("ก๊อปปี้เลขบัญชีให้แล้วจ้า! เอาไปวางในแอปธนาคารได้เลย 📋");
     setTimeout(() => setCopied(false), 2000);
   }
 
@@ -41,7 +41,7 @@ export function PaymentInfoCard({
       <div className="flex items-center gap-2 pb-1 border-b border-muted/30">
         <IconWallet className="w-4 h-4 text-emerald-500" />
         <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          ช่องทางสนับสนุน & ทิป
+          ช่องทางสนับสนุนและให้ทิปพี่นักดนตรี 💖
         </h3>
       </div>
 
@@ -57,7 +57,7 @@ export function PaymentInfoCard({
             />
           </div>
           <p className="text-[10px] text-muted-foreground text-center font-medium mt-1">
-            สแกน QR Code ด้วยแอปธนาคารเพื่อโอนทิป
+            สแกน QR Code ด้วยแอปธนาคารเพื่อโอนทิปเป็นกำลังใจให้กันนะน้าา 💸
           </p>
         </div>
       )}

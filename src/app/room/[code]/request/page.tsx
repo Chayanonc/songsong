@@ -29,7 +29,7 @@ export default async function RequestPage({
           <div className="p-3.5 rounded-full bg-primary/5 text-primary border border-primary/10 mb-1">
             <MicrophoneIllustration className="w-10 h-10" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">ขอเพลง</h1>
+          <h1 className="text-2xl font-bold tracking-tight">ส่งคำขอเพลง 🎵</h1>
           <div className="flex items-center gap-1.5 justify-center">
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -38,14 +38,14 @@ export default async function RequestPage({
             <p className="text-xs text-muted-foreground font-semibold">
               {room.musicianName ? (
                 <>
-                  นักดนตรี:{" "}
+                  พี่นักดนตรี / วง:{" "}
                   <span className="text-foreground font-bold">
                     {room.musicianName}
                   </span>
                 </>
               ) : (
                 <>
-                  ห้อง:{" "}
+                  ห้องขอเพลง:{" "}
                   <span className="text-foreground font-mono font-bold tracking-wider">
                     {upperCode}
                   </span>

@@ -46,14 +46,14 @@ export function HomeTabs() {
             className="rounded-lg cursor-pointer gap-1.5 text-xs font-semibold"
           >
             <IconUser className="w-3.5 h-3.5" />
-            ลูกค้า (ขอเพลง)
+            ลูกค้า (อยากขอเพลง 🎶)
           </TabsTrigger>
           <TabsTrigger
             value="musician"
             className="rounded-lg cursor-pointer gap-1.5 text-xs font-semibold"
           >
             <IconMusic className="w-3.5 h-3.5" />
-            นักดนตรี (เปิดห้อง)
+            นักดนตรี (เปิดเวที 🎸)
           </TabsTrigger>
         </TabsList>
 
@@ -61,10 +61,10 @@ export function HomeTabs() {
         <TabsContent value="customer" className="mt-4 flex flex-col gap-4">
           <div className="space-y-1">
             <p className="text-sm font-semibold text-foreground">
-              เข้าห้องขอเพลง
+              เข้าห้องมาขอเพลงกัน! 🎉
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              กรอกรหัสห้อง 6 หลักที่คุณได้รับจากนักดนตรี เพื่อเริ่มส่งคำขอเพลง
+              ใส่รหัสห้อง 6 หลักที่คุณได้รับจากพี่ ๆ นักดนตรี เพื่อเริ่มขอเพลงกันได้เลย! ✨
             </p>
           </div>
           <RoomCodeEntry />
@@ -74,11 +74,10 @@ export function HomeTabs() {
         <TabsContent value="musician" className="mt-4 flex flex-col gap-4">
           <div className="space-y-1">
             <p className="text-sm font-semibold text-foreground">
-              รับคำขอเพลงสด
+              เปิดห้องรับคำขอเพลง 🎤
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              สร้างห้องขอเพลงของคุณ จากนั้นแชร์ QR Code
-              หรือรหัสห้องเพื่อรับเพลงจากลูกค้าแบบเรียลไทม์
+              สร้างห้องเพลงของคุณ แล้วแชร์ QR Code หรือรหัสห้องให้แฟนเพลงสแกนขอเพลงกันเข้ามาได้เลยแบบเรียลไทม์!
             </p>
           </div>
 
@@ -90,7 +89,7 @@ export function HomeTabs() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <span className="text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
-                  คุณมีห้องที่เปิดใช้งานอยู่
+                  คุณมีห้องดนตรีที่กำลังเปิดใช้งานอยู่ครับ 🟢
                 </span>
               </div>
               <p className="font-mono text-2xl font-bold tracking-widest text-primary leading-none">
@@ -101,7 +100,7 @@ export function HomeTabs() {
                   onClick={() => router.push(`/room/${existingCode}`)}
                   className="flex-1 rounded-xl h-10 font-semibold text-xs cursor-pointer shadow-sm active:scale-98"
                 >
-                  กลับห้องเดิม
+                  กลับเข้าห้องเดิม 🎸
                 </Button>
                 <Button
                   onClick={handleCreateRoom}
@@ -122,7 +121,7 @@ export function HomeTabs() {
               className="w-full h-11 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/15 active:scale-98 gap-1.5"
             >
               <IconPlus className="w-4 h-4" />
-              {isPending ? "กำลังสร้างห้อง..." : "สร้างห้องเพลงใหม่"}
+              {isPending ? "กำลังสร้างห้อง..." : "สร้างห้องขอเพลงใหม่ ✨"}
             </Button>
           )}
         </TabsContent>

@@ -14,7 +14,7 @@ export function RoomCodeEntry() {
     e.preventDefault();
     const trimmed = code.trim().toUpperCase();
     if (!trimmed) {
-      setError("กรุณาใส่รหัสห้อง");
+      setError("อย่าลืมใส่รหัสห้องน้าา ~");
       return;
     }
     router.push(`/room/${trimmed}/request`);
@@ -37,7 +37,7 @@ export function RoomCodeEntry() {
         type="submit"
         className="w-full h-11 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/15 active:scale-98"
       >
-        เข้าสู่ห้องขอเพลง
+        ไปที่ห้องขอเพลงกันเลย! 🚀
       </Button>
     </form>
   );

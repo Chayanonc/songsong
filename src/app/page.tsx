@@ -10,7 +10,7 @@ export default function Home() {
           <MicrophoneIllustration className="w-28 h-28 text-primary" />
           <h1 className="text-3xl font-bold tracking-tight">SongSong</h1>
           <p className="text-muted-foreground text-sm">
-            ระบบขอเพลงสำหรับนักดนตรีสด — ง่าย ไม่ต้อง login
+            ขอเพลงง่าย ๆ ให้พี่ ๆ นักดนตรีสด — ขอมาก็จัดให้ ไม่ต้อง Login! 🎶
           </p>
         </div>
 

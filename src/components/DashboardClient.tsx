@@ -103,7 +103,7 @@ export function DashboardClient({
 
   function handleCopyLink() {
     navigator.clipboard.writeText(requestUrl);
-    toast.success("คัดลอกลิงก์สำหรับขอเพลงแล้ว!");
+    toast.success("ก๊อปปี้ลิงก์ขอเพลงให้แล้วน้า! ส่งต่อได้เลย 🔗");
   }
 
   function handleDownloadQR() {
@@ -156,7 +156,7 @@ export function DashboardClient({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="text-[10px] md:text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-              ห้องเปิดอยู่
+              เปิดห้องรับเพลงอยู่จ้า 🟢
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -194,10 +194,10 @@ export function DashboardClient({
             <DialogContent className="flex flex-col items-center gap-4 p-6 max-w-xs bg-background/95 backdrop-blur border-border rounded-2xl">
               <DialogHeader className="text-center">
                 <DialogTitle className="text-base font-semibold">
-                  สแกนเพื่อขอเพลง
+                  สแกนขอเพลงตรงนี้เลย! 🎵
                 </DialogTitle>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  ลูกค้าสแกน QR Code นี้เพื่อเปิดหน้าจอส่งคำขอเพลง
+                  แชร์หน้าจอนี้ให้คุณลูกค้าสแกนขอเพลงกันเข้ามาได้เลยน้า
                 </p>
               </DialogHeader>
               <div className="relative flex items-center justify-center bg-white p-3 rounded-xl border border-muted/20 shadow-inner">
@@ -208,7 +208,7 @@ export function DashboardClient({
               </div>
               <div className="text-center">
                 <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                  รหัสสำหรับพิมพ์เข้าห้อง
+                  หรือพิมพ์รหัสเข้าห้อง:
                 </p>
                 <p className="font-mono text-xl font-bold tracking-widest text-primary mt-0.5">
                   {code}
@@ -221,7 +221,7 @@ export function DashboardClient({
                 onClick={handleDownloadQR}
               >
                 <IconDownload className="w-4 h-4" />
-                ดาวน์โหลด QR Code
+                เซฟรูป QR Code 📥
               </Button>
             </DialogContent>
           </Dialog>
@@ -241,14 +241,14 @@ export function DashboardClient({
             <DialogContent className="max-w-xs rounded-2xl p-6 gap-4">
               <DialogHeader>
                 <DialogTitle className="text-base font-semibold">
-                  ปิดห้องนี้?
+                  จะปิดห้องนี้จริงๆ หรอ?
                 </DialogTitle>
                 <DialogDescription className="text-sm text-muted-foreground">
                   คำขอเพลงทั้งหมดในห้อง{" "}
                   <span className="font-mono font-bold text-foreground">
                     {code}
                   </span>{" "}
-                  จะถูกลบถาวร และลูกค้าจะไม่สามารถเข้าห้องนี้ได้อีก
+                  จะหายไปถาวร และคุณลูกค้าจะไม่สามารถเข้ามาร่วมขอเพลงได้อีกนะจ๊ะ
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter className="flex-row gap-2 sm:justify-end">
@@ -259,7 +259,7 @@ export function DashboardClient({
                   onClick={() => setCloseDialogOpen(false)}
                   className="flex-1 sm:flex-none cursor-pointer"
                 >
-                  ยกเลิก
+                  เอาไว้ก่อน
                 </Button>
                 <Button
                   variant="destructive"
@@ -268,7 +268,7 @@ export function DashboardClient({
                   onClick={handleCloseRoom}
                   className="flex-1 sm:flex-none cursor-pointer"
                 >
-                  {isClosing ? "กำลังปิด..." : "ปิดห้อง"}
+                  {isClosing ? "กำลังปิดห้อง..." : "ปิดห้องเลย"}
                 </Button>
               </DialogFooter>
             </DialogContent>
@@ -282,14 +282,14 @@ export function DashboardClient({
       <div className="grid grid-cols-2 gap-3 w-full">
         <div className="flex flex-col p-3.5 rounded-xl border border-border bg-card shadow-sm">
           <span className="text-[10px] md:text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            คิวเพลงทั้งหมด
+            เพลงขอทั้งหมด 🎵
           </span>
           <div className="flex items-baseline gap-1.5 mt-1.5">
             <span className="text-2xl font-bold font-mono text-foreground leading-none">
               {totalRequests}
             </span>
             <span className="text-xs text-muted-foreground">
-              (เสร็จ {completedRequests})
+              (เล่นจบไปแล้ว {completedRequests} เพลง)
             </span>
           </div>
         </div>
@@ -297,7 +297,7 @@ export function DashboardClient({
         <div className="flex flex-col p-3.5 rounded-xl border border-border bg-card shadow-sm">
           <span className="text-[10px] md:text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1">
             <IconCoin className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500/10" />
-            ยอดทิปสะสม
+            ทิปสะสมรวม 💸
           </span>
           <div className="flex items-baseline gap-1 mt-1.5">
             <span className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">
@@ -316,7 +316,7 @@ export function DashboardClient({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
             <h2 className="text-xs font-bold uppercase tracking-wider text-primary">
-              กำลังเล่นอยู่
+              กำลังร้อง/เล่นเพลงนี้อยู่จ้า 🎤
             </h2>
             <Badge className="px-1.5 py-0 text-[10px] rounded-full bg-primary/10 text-primary hover:bg-primary/20 border-none font-semibold">
               {playing.length}
@@ -334,7 +334,7 @@ export function DashboardClient({
       <section className="flex flex-col gap-3">
         <div className="flex items-center gap-2">
           <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            คิวเพลงขอ
+            คิวเพลงขอที่รออยู่ 🕒
           </h2>
           <Badge
             variant="secondary"
@@ -350,10 +350,10 @@ export function DashboardClient({
             </div>
             <div className="text-center px-4">
               <p className="text-sm font-medium text-foreground/80">
-                ยังไม่มีคำขอเพลง
+                ยังไม่มีคนขอเพลงเข้ามาเลยน้า 🥺
               </p>
               <p className="text-xs text-muted-foreground mt-1">
-                คัดลอกลิงก์หรือเปิด QR Code ด้านบนให้ลูกค้าสแกนเพื่อเริ่มขอเพลง
+                ลองส่งลิงก์หรือเปิด QR Code ให้คุณลูกค้าสแกนกันเข้ามาเลย!
               </p>
             </div>
           </div>
@@ -372,7 +372,7 @@ export function DashboardClient({
           <Separator className="my-2" />
           <div className="flex items-center gap-2">
             <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              ประวัติเพลงที่เล่นแล้ว
+              ประวัติเพลงที่เล่นเสร็จแล้ว 📜
             </h2>
             <Badge
               variant="outline"

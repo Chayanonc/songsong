@@ -51,12 +51,12 @@ export async function submitSongRequest(
     (formData.get("tableNumber") as string | null)?.trim() || null;
   const tipRaw = (formData.get("tipAmount") as string | null)?.trim();
 
-  if (!roomCode) return { error: "ไม่พบรหัสห้อง" };
-  if (!songName) return { error: "กรุณาใส่ชื่อเพลง" };
+  if (!roomCode) return { error: "เอ๊ะ! ไม่พบรหัสห้องนี้แฮะ ลองเช็กดูอีกทีน้า" };
+  if (!songName) return { error: "อย่าลืมพิมพ์ชื่อเพลงด้วยน้า 🎵" };
 
   const room = await prisma.room.findUnique({ where: { code: roomCode } });
   if (!room || room.expiresAt < new Date())
-    return { error: "ห้องนี้ปิดแล้วหรือหมดอายุ" };
+    return { error: "ห้องดนตรีนี้อาจจะหมดอายุ (24 ชม.) หรือปิดไปแล้วจ้า" };
 
   let tipAmount: number | null = null;
   if (tipRaw) {
@@ -91,7 +91,7 @@ export async function updateRequestStatus(
     });
     return { success: true };
   } catch {
-    return { error: "ไม่สามารถอัปเดตสถานะได้" };
+    return { error: "เกิดข้อผิดพลาดในการอัปเดตสถานะ ลองใหม่อีกครั้งนะจ๊ะ" };
   }
 }
 
@@ -102,7 +102,7 @@ export async function closeRoom(
     await prisma.room.delete({ where: { code: code.toUpperCase() } });
     return { success: true };
   } catch {
-    return { error: "ไม่สามารถปิดห้องได้" };
+    return { error: "เกิดข้อผิดพลาดในการปิดห้อง ลองใหม่อีกครั้งนะจ๊ะ" };
   }
 }
 
@@ -131,6 +131,6 @@ export async function updateRoomSettings(
     });
     return { success: true };
   } catch {
-    return { error: "ไม่สามารถบันทึกการตั้งค่าได้" };
+    return { error: "เกิดข้อผิดพลาดในการบันทึกการตั้งค่า ลองใหม่อีกครั้งนะจ๊ะ" };
   }
 }

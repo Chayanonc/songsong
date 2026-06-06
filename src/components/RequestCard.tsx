@@ -17,10 +17,10 @@ import {
 } from "@tabler/icons-react";
 
 const STATUS_LABEL: Record<RequestStatus, string> = {
-  PENDING: "รอเล่น",
-  PLAYING: "กำลังเล่น",
-  DONE: "เล่นแล้ว",
-  REJECTED: "ข้าม",
+  PENDING: "รอคิว 🕒",
+  PLAYING: "กำลังเล่น 🎤",
+  DONE: "เล่นจบแล้ว 🎉",
+  REJECTED: "ข้ามไปก่อน",
 };
 
 const STATUS_VARIANT: Record<
@@ -75,7 +75,7 @@ export function RequestCard({ request }: { request: SongRequest }) {
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
               </span>
               <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
-                กำลังเล่นอยู่
+                กำลังเล่นอยู่จ้า 🎤
               </span>
             </div>
 
@@ -100,7 +100,7 @@ export function RequestCard({ request }: { request: SongRequest }) {
               )}
               {request.customerName && (
                 <span>
-                  ขอโดย{" "}
+                  ขอโดยคุณ{" "}
                   <span className="font-medium text-foreground/80">
                     {request.customerName}
                   </span>
@@ -137,8 +137,8 @@ export function RequestCard({ request }: { request: SongRequest }) {
               className="gap-1.5 h-9 px-3 sm:px-4 rounded-lg font-medium text-xs bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 cursor-pointer shadow-sm active:scale-98 ml-auto md:ml-0"
             >
               <IconCheck className="w-4 h-4" />
-              <span className="hidden sm:inline">เสร็จเรียบร้อยแล้ว</span>
-              <span className="sm:hidden">เสร็จ</span>
+              <span className="hidden sm:inline">เล่นจบแล้วจ้า 🎉</span>
+              <span className="sm:hidden">จบเพลง</span>
             </Button>
           </div>
         </CardContent>
@@ -194,7 +194,7 @@ export function RequestCard({ request }: { request: SongRequest }) {
             )}
             {request.customerName && (
               <span>
-                ขอโดย{" "}
+                ขอโดยคุณ{" "}
                 <span className="font-medium text-foreground/80">
                   {request.customerName}
                 </span>
@@ -223,7 +223,7 @@ export function RequestCard({ request }: { request: SongRequest }) {
               className="flex-1 gap-1 h-8 rounded-lg font-medium text-xs transition-all duration-200 cursor-pointer shadow-sm active:scale-98"
             >
               <IconPlayerPlay className="w-3.5 h-3.5 fill-current" />
-              เล่นเลย
+              ร้องเพลงนี้เลย 🎤
             </Button>
             <Button
               size="sm"
@@ -233,7 +233,7 @@ export function RequestCard({ request }: { request: SongRequest }) {
               className="flex-1 gap-1 h-8 rounded-lg font-medium text-xs hover:bg-emerald-500/10 hover:text-emerald-600 hover:border-emerald-500/20 transition-all duration-200 cursor-pointer"
             >
               <IconCheck className="w-3.5 h-3.5" />
-              เสร็จแล้ว
+              เล่นจบแล้ว 🎉
             </Button>
             <Button
               size="sm"
@@ -243,7 +243,7 @@ export function RequestCard({ request }: { request: SongRequest }) {
               className="gap-1 h-8 px-2.5 rounded-lg text-[11px] font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-200 cursor-pointer"
             >
               <IconPlayerSkipForward className="w-3.5 h-3.5" />
-              ข้าม
+              ข้ามไปก่อน
             </Button>
           </div>
         )}
