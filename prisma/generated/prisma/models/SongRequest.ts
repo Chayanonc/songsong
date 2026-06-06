@@ -42,7 +42,6 @@ export type SongRequestMinAggregateOutputType = {
   customerName: string | null
   tableNumber: string | null
   tipAmount: number | null
-  slipBase64: string | null
   status: $Enums.RequestStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,7 +55,6 @@ export type SongRequestMaxAggregateOutputType = {
   customerName: string | null
   tableNumber: string | null
   tipAmount: number | null
-  slipBase64: string | null
   status: $Enums.RequestStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -70,7 +68,6 @@ export type SongRequestCountAggregateOutputType = {
   customerName: number
   tableNumber: number
   tipAmount: number
-  slipBase64: number
   status: number
   createdAt: number
   updatedAt: number
@@ -94,7 +91,6 @@ export type SongRequestMinAggregateInputType = {
   customerName?: true
   tableNumber?: true
   tipAmount?: true
-  slipBase64?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -108,7 +104,6 @@ export type SongRequestMaxAggregateInputType = {
   customerName?: true
   tableNumber?: true
   tipAmount?: true
-  slipBase64?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -122,7 +117,6 @@ export type SongRequestCountAggregateInputType = {
   customerName?: true
   tableNumber?: true
   tipAmount?: true
-  slipBase64?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -223,7 +217,6 @@ export type SongRequestGroupByOutputType = {
   customerName: string | null
   tableNumber: string | null
   tipAmount: number | null
-  slipBase64: string | null
   status: $Enums.RequestStatus
   createdAt: Date
   updatedAt: Date
@@ -260,7 +253,6 @@ export type SongRequestWhereInput = {
   customerName?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   tableNumber?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   tipAmount?: Prisma.IntNullableFilter<"SongRequest"> | number | null
-  slipBase64?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   status?: Prisma.EnumRequestStatusFilter<"SongRequest"> | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFilter<"SongRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SongRequest"> | Date | string
@@ -275,7 +267,6 @@ export type SongRequestOrderByWithRelationInput = {
   customerName?: Prisma.SortOrderInput | Prisma.SortOrder
   tableNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   tipAmount?: Prisma.SortOrderInput | Prisma.SortOrder
-  slipBase64?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -293,7 +284,6 @@ export type SongRequestWhereUniqueInput = Prisma.AtLeast<{
   customerName?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   tableNumber?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   tipAmount?: Prisma.IntNullableFilter<"SongRequest"> | number | null
-  slipBase64?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   status?: Prisma.EnumRequestStatusFilter<"SongRequest"> | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFilter<"SongRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SongRequest"> | Date | string
@@ -308,7 +298,6 @@ export type SongRequestOrderByWithAggregationInput = {
   customerName?: Prisma.SortOrderInput | Prisma.SortOrder
   tableNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   tipAmount?: Prisma.SortOrderInput | Prisma.SortOrder
-  slipBase64?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -330,7 +319,6 @@ export type SongRequestScalarWhereWithAggregatesInput = {
   customerName?: Prisma.StringNullableWithAggregatesFilter<"SongRequest"> | string | null
   tableNumber?: Prisma.StringNullableWithAggregatesFilter<"SongRequest"> | string | null
   tipAmount?: Prisma.IntNullableWithAggregatesFilter<"SongRequest"> | number | null
-  slipBase64?: Prisma.StringNullableWithAggregatesFilter<"SongRequest"> | string | null
   status?: Prisma.EnumRequestStatusWithAggregatesFilter<"SongRequest"> | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SongRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SongRequest"> | Date | string
@@ -343,7 +331,6 @@ export type SongRequestCreateInput = {
   customerName?: string | null
   tableNumber?: string | null
   tipAmount?: number | null
-  slipBase64?: string | null
   status?: $Enums.RequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -358,7 +345,6 @@ export type SongRequestUncheckedCreateInput = {
   customerName?: string | null
   tableNumber?: string | null
   tipAmount?: number | null
-  slipBase64?: string | null
   status?: $Enums.RequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -371,7 +357,6 @@ export type SongRequestUpdateInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -386,7 +371,6 @@ export type SongRequestUncheckedUpdateInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,7 +384,6 @@ export type SongRequestCreateManyInput = {
   customerName?: string | null
   tableNumber?: string | null
   tipAmount?: number | null
-  slipBase64?: string | null
   status?: $Enums.RequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -413,7 +396,6 @@ export type SongRequestUpdateManyMutationInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,7 +409,6 @@ export type SongRequestUncheckedUpdateManyInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -451,7 +432,6 @@ export type SongRequestCountOrderByAggregateInput = {
   customerName?: Prisma.SortOrder
   tableNumber?: Prisma.SortOrder
   tipAmount?: Prisma.SortOrder
-  slipBase64?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -469,7 +449,6 @@ export type SongRequestMaxOrderByAggregateInput = {
   customerName?: Prisma.SortOrder
   tableNumber?: Prisma.SortOrder
   tipAmount?: Prisma.SortOrder
-  slipBase64?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -483,7 +462,6 @@ export type SongRequestMinOrderByAggregateInput = {
   customerName?: Prisma.SortOrder
   tableNumber?: Prisma.SortOrder
   tipAmount?: Prisma.SortOrder
-  slipBase64?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -558,7 +536,6 @@ export type SongRequestCreateWithoutRoomInput = {
   customerName?: string | null
   tableNumber?: string | null
   tipAmount?: number | null
-  slipBase64?: string | null
   status?: $Enums.RequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -571,7 +548,6 @@ export type SongRequestUncheckedCreateWithoutRoomInput = {
   customerName?: string | null
   tableNumber?: string | null
   tipAmount?: number | null
-  slipBase64?: string | null
   status?: $Enums.RequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -614,7 +590,6 @@ export type SongRequestScalarWhereInput = {
   customerName?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   tableNumber?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   tipAmount?: Prisma.IntNullableFilter<"SongRequest"> | number | null
-  slipBase64?: Prisma.StringNullableFilter<"SongRequest"> | string | null
   status?: Prisma.EnumRequestStatusFilter<"SongRequest"> | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFilter<"SongRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SongRequest"> | Date | string
@@ -627,7 +602,6 @@ export type SongRequestCreateManyRoomInput = {
   customerName?: string | null
   tableNumber?: string | null
   tipAmount?: number | null
-  slipBase64?: string | null
   status?: $Enums.RequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -640,7 +614,6 @@ export type SongRequestUpdateWithoutRoomInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -653,7 +626,6 @@ export type SongRequestUncheckedUpdateWithoutRoomInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -666,7 +638,6 @@ export type SongRequestUncheckedUpdateManyWithoutRoomInput = {
   customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tipAmount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  slipBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -682,7 +653,6 @@ export type SongRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   customerName?: boolean
   tableNumber?: boolean
   tipAmount?: boolean
-  slipBase64?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -697,7 +667,6 @@ export type SongRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   customerName?: boolean
   tableNumber?: boolean
   tipAmount?: boolean
-  slipBase64?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -712,7 +681,6 @@ export type SongRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   customerName?: boolean
   tableNumber?: boolean
   tipAmount?: boolean
-  slipBase64?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -727,13 +695,12 @@ export type SongRequestSelectScalar = {
   customerName?: boolean
   tableNumber?: boolean
   tipAmount?: boolean
-  slipBase64?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SongRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "songName" | "bandName" | "customerName" | "tableNumber" | "tipAmount" | "slipBase64" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["songRequest"]>
+export type SongRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "songName" | "bandName" | "customerName" | "tableNumber" | "tipAmount" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["songRequest"]>
 export type SongRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
@@ -757,7 +724,6 @@ export type $SongRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
     customerName: string | null
     tableNumber: string | null
     tipAmount: number | null
-    slipBase64: string | null
     status: $Enums.RequestStatus
     createdAt: Date
     updatedAt: Date
@@ -1192,7 +1158,6 @@ export interface SongRequestFieldRefs {
   readonly customerName: Prisma.FieldRef<"SongRequest", 'String'>
   readonly tableNumber: Prisma.FieldRef<"SongRequest", 'String'>
   readonly tipAmount: Prisma.FieldRef<"SongRequest", 'Int'>
-  readonly slipBase64: Prisma.FieldRef<"SongRequest", 'String'>
   readonly status: Prisma.FieldRef<"SongRequest", 'RequestStatus'>
   readonly createdAt: Prisma.FieldRef<"SongRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SongRequest", 'DateTime'>

@@ -89,7 +89,6 @@ export const SongRequestScalarFieldEnum = {
   customerName: 'customerName',
   tableNumber: 'tableNumber',
   tipAmount: 'tipAmount',
-  slipBase64: 'slipBase64',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

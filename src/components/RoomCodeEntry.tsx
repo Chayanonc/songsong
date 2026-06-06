@@ -30,7 +30,7 @@ export function RoomCodeEntry() {
         }}
         placeholder="เช่น AX7K2P"
         maxLength={6}
-        className="text-center text-xl tracking-widest uppercase"
+        className="text-center font-semibold tracking-widest uppercase"
       />
       {error && <p className="text-sm text-destructive text-center">{error}</p>}
       <Button type="submit" variant="outline" className="w-full">

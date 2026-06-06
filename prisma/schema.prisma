@@ -38,7 +38,6 @@ model SongRequest {
   customerName String?
   tableNumber  String?
   tipAmount    Int?
-  slipBase64   String?
   status       RequestStatus @default(PENDING)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt

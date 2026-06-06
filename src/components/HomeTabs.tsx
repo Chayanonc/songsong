@@ -17,14 +17,11 @@ export function HomeTabs() {
 
   useEffect(() => {
     const code = localStorage.getItem(ROOM_KEY);
-    if (!code) {
-      setSessionChecked(true);
-      return;
-    }
-    validateRoomCode(code).then(({ valid }) => {
-      if (valid) {
+    const check = code ? validateRoomCode(code) : Promise.resolve(null);
+    check.then((result) => {
+      if (result?.valid) {
         setExistingCode(code);
-      } else {
+      } else if (code) {
         localStorage.removeItem(ROOM_KEY);
       }
       setSessionChecked(true);
@@ -40,13 +37,13 @@ export function HomeTabs() {
   }
 
   return (
-    <Tabs defaultValue="musician" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
+    <Tabs defaultValue="customer" className="w-full">
+      <TabsList className="grid w-full grid-cols-2 p-0 m-0">
         <TabsTrigger value="musician">นักดนตรี</TabsTrigger>
         <TabsTrigger value="customer">ลูกค้า</TabsTrigger>
       </TabsList>
 
-      <TabsContent value="musician" className="mt-4 flex flex-col gap-3">
+      <TabsContent value="musician" className="mt-2 flex flex-col gap-3">
         <p className="text-sm text-muted-foreground">
           สร้างห้องรับคำขอเพลง แชร์ QR code ให้ลูกค้า
         </p>

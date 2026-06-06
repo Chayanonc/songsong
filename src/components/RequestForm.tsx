@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Label } from "@/components/ui/label";
 import {
   Form,
   FormControl,
@@ -36,9 +35,6 @@ interface RequestFormProps {
 export function RequestForm({ roomCode }: RequestFormProps) {
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState("");
-  const [slipBase64, setSlipBase64] = useState("");
-  const [slipError, setSlipError] = useState("");
-  const fileRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FormValues>({
     resolver: standardSchemaResolver(schema),
@@ -51,22 +47,7 @@ export function RequestForm({ roomCode }: RequestFormProps) {
     },
   });
 
-  function handleSlipChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 380_000) {
-      setSlipError("ไฟล์ใหญ่เกินไป (สูงสุด 375 KB)");
-      e.target.value = "";
-      return;
-    }
-    setSlipError("");
-    const reader = new FileReader();
-    reader.onload = () => setSlipBase64(reader.result as string);
-    reader.readAsDataURL(file);
-  }
-
   async function onSubmit(values: FormValues) {
-    if (slipError) return;
     setServerError("");
 
     const formData = new FormData();
@@ -76,7 +57,6 @@ export function RequestForm({ roomCode }: RequestFormProps) {
     if (values.customerName) formData.set("customerName", values.customerName);
     if (values.tableNumber) formData.set("tableNumber", values.tableNumber);
     if (values.tipAmount) formData.set("tipAmount", values.tipAmount);
-    if (slipBase64) formData.set("slipBase64", slipBase64);
 
     const result = await submitSongRequest(undefined, formData);
     if ("error" in result) {
@@ -97,9 +77,6 @@ export function RequestForm({ roomCode }: RequestFormProps) {
           onClick={() => {
             setSuccess(false);
             setServerError("");
-            setSlipBase64("");
-            setSlipError("");
-            if (fileRef.current) fileRef.current.value = "";
             form.reset();
           }}
         >
@@ -214,36 +191,6 @@ export function RequestForm({ roomCode }: RequestFormProps) {
             </FormItem>
           )}
         />
-
-        {/* Slip — file input with base64 preview, validated separately */}
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="slip">
-            สลิป{" "}
-            <span className="text-muted-foreground text-xs font-normal">
-              (optional)
-            </span>
-          </Label>
-          <Input
-            id="slip"
-            ref={fileRef}
-            type="file"
-            accept="image/*"
-            onChange={handleSlipChange}
-            className="cursor-pointer"
-          />
-          {slipError && (
-            <p className="text-[0.8rem] font-medium text-destructive">
-              {slipError}
-            </p>
-          )}
-          {slipBase64 && !slipError && (
-            <img
-              src={slipBase64}
-              alt="preview"
-              className="h-20 w-20 object-cover rounded border"
-            />
-          )}
-        </div>
 
         {serverError && (
           <p className="text-sm text-destructive text-center">{serverError}</p>
