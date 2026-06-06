@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
 import { toast } from "sonner";
@@ -23,6 +23,7 @@ import {
   IconCoin,
   IconCopy,
   IconDoorExit,
+  IconDownload,
   IconQrcode,
 } from "@tabler/icons-react";
 
@@ -40,6 +41,7 @@ export function DashboardClient({
   initialRequests,
 }: DashboardClientProps) {
   const router = useRouter();
+  const qrRef = useRef<HTMLDivElement>(null);
   const [requests, setRequests] = useState<SongRequest[]>(initialRequests);
   const [confirmClose, setConfirmClose] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -89,6 +91,31 @@ export function DashboardClient({
   function handleCopyLink() {
     navigator.clipboard.writeText(requestUrl);
     toast.success("คัดลอกลิงก์สำหรับขอเพลงแล้ว!");
+  }
+
+  function handleDownloadQR() {
+    const svgEl = qrRef.current?.querySelector("svg");
+    if (!svgEl) return;
+    const size = 512;
+    const svgData = new XMLSerializer().serializeToString(svgEl);
+    const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext("2d")!;
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      const a = document.createElement("a");
+      a.download = `songsong-qr-${code}.png`;
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    };
+    img.src = url;
   }
 
   const pending = requests.filter((r) => r.status === "PENDING");
@@ -159,7 +186,7 @@ export function DashboardClient({
               </DialogHeader>
               <div className="relative flex items-center justify-center bg-white p-3 rounded-xl border border-muted/20 shadow-inner">
                 <QrFrameIllustration className="absolute inset-0 w-full h-full text-primary opacity-30" />
-                <div className="p-3">
+                <div className="p-3" ref={qrRef}>
                   <QRCode value={requestUrl} size={160} />
                 </div>
               </div>
@@ -171,6 +198,15 @@ export function DashboardClient({
                   {code}
                 </p>
               </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full gap-2 cursor-pointer"
+                onClick={handleDownloadQR}
+              >
+                <IconDownload className="w-4 h-4" />
+                ดาวน์โหลด QR Code
+              </Button>
             </DialogContent>
           </Dialog>
 

@@ -64,7 +64,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - Use `react-hook-form` + `zod` + shadcn `Form` / `FormField` / `FormItem` / `FormLabel` / `FormControl` / `FormMessage`
 - **Resolver**: import from `@hookform/resolvers/standard-schema` (not `@hookform/resolvers/zod`) — `zodResolver` is incompatible with Zod v4; use `standardSchemaResolver` instead
-- File inputs (e.g. slip upload) that need base64 conversion are handled outside RHF with a plain `Label` + `Input` + manual `useState`; validate size before encoding and surface errors via a local state string
 
 ### Illustrations
 
@@ -91,10 +90,10 @@ src/
 ├── components/
 │   ├── ui/                      # shadcn components
 │   ├── illustrations/           # SVG line-art components
-│   ├── DashboardClient.tsx      # "use client" — SSE consumer + QR modal
+│   ├── DashboardClient.tsx      # "use client" — SSE consumer + QR modal + QR download
 │   ├── HomeTabs.tsx             # "use client" — musician/customer tabs on landing
 │   ├── RequestCard.tsx          # "use client" — single request card + status buttons
-│   ├── RequestForm.tsx          # "use client" — RHF+zod form, slip→base64
+│   ├── RequestForm.tsx          # "use client" — RHF+zod song request form
 │   └── RoomCodeEntry.tsx        # "use client" — room code input on landing page
 └── lib/
     ├── actions.ts               # Server Actions (createRoom, submitSongRequest, etc.)
@@ -118,20 +117,24 @@ model Room {
   createdAt DateTime      @default(now())
   expiresAt DateTime                // now() + 24h on create
   requests  SongRequest[]
+
+  @@index([code])
 }
 
 model SongRequest {
   id           String        @id @default(cuid())
   roomId       String
+  room         Room          @relation(fields: [roomId], references: [id], onDelete: Cascade)
   songName     String
   bandName     String?
   customerName String?
   tableNumber  String?
   tipAmount    Int?                  // stored in satang (×100), avoid float
-  slipBase64   String?              // data:image/... base64, max ~375 KB
   status       RequestStatus @default(PENDING)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+
+  @@index([roomId, createdAt])
 }
 ```
 
