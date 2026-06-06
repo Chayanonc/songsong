@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RequestStatus {
+  PENDING
+  PLAYING
+  DONE
+  REJECTED
+}
+
+model Room {
+  id        String        @id @default(cuid())
+  code      String        @unique
+  createdAt DateTime      @default(now())
+  expiresAt DateTime
+  requests  SongRequest[]
+
+  @@index([code])
+}
+
+model SongRequest {
+  id           String        @id @default(cuid())
+  roomId       String
+  room         Room          @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  songName     String
+  bandName     String?
+  customerName String?
+  tableNumber  String?
+  tipAmount    Int?
+  slipBase64   String?
+  status       RequestStatus @default(PENDING)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([roomId, createdAt])
+}
