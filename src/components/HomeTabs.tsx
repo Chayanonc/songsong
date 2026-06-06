@@ -41,11 +41,17 @@ export function HomeTabs() {
     <div className="w-full bg-card border border-border/80 p-5 rounded-2xl shadow-sm">
       <Tabs defaultValue="customer" className="w-full">
         <TabsList className="grid w-full grid-cols-2 p-1 bg-muted rounded-xl h-11 mb-2">
-          <TabsTrigger value="customer" className="rounded-lg cursor-pointer gap-1.5 text-xs font-semibold">
+          <TabsTrigger
+            value="customer"
+            className="rounded-lg cursor-pointer gap-1.5 text-xs font-semibold"
+          >
             <IconUser className="w-3.5 h-3.5" />
             ลูกค้า (ขอเพลง)
           </TabsTrigger>
-          <TabsTrigger value="musician" className="rounded-lg cursor-pointer gap-1.5 text-xs font-semibold">
+          <TabsTrigger
+            value="musician"
+            className="rounded-lg cursor-pointer gap-1.5 text-xs font-semibold"
+          >
             <IconMusic className="w-3.5 h-3.5" />
             นักดนตรี (เปิดห้อง)
           </TabsTrigger>
@@ -71,7 +77,8 @@ export function HomeTabs() {
               รับคำขอเพลงสด
             </p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              สร้างห้องขอเพลงของคุณ จากนั้นแชร์ QR Code หรือรหัสห้องเพื่อรับเพลงจากลูกค้าแบบเรียลไทม์
+              สร้างห้องขอเพลงของคุณ จากนั้นแชร์ QR Code
+              หรือรหัสห้องเพื่อรับเพลงจากลูกค้าแบบเรียลไทม์
             </p>
           </div>
 
@@ -123,4 +130,3 @@ export function HomeTabs() {
     </div>
   );
 }
-
