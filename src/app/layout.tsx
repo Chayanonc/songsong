@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Prompt, Geist_Mono } from "next/font/google";
+import { Geist_Mono, IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 
-const prompt = Prompt({
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "500", "600", "700"],
+const ibmPlexSansThai = IBM_Plex_Sans_Thai({
+  subsets: ["thai"],
+  weight: ["200", "300", "400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
@@ -31,7 +31,7 @@ export default function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        prompt.variable,
+        ibmPlexSansThai.variable,
         geistMono.variable,
         "font-sans",
       )}

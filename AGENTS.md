@@ -21,7 +21,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | Styling       | Tailwind CSS v4 (no config file — uses CSS-first config in `globals.css`)          |
 | UI Components | shadcn (style: `radix-luma`, baseColor: `mist`) via `@/components/ui/`             |
 | Icons         | `@tabler/icons-react`                                                              |
-| Font          | Prompt (Thai + Latin, weight 300–700) + Geist Mono — loaded via `next/font/google` |
+| Font          | IBM Plex Sans Thai (weight 200–700) + Geist Mono — loaded via `next/font/google`  |
+| Forms         | `react-hook-form` + `zod` + shadcn `Form` (`@hookform/resolvers/standard-schema`) |
 | ORM           | Prisma 7 — uses `prisma.config.ts` for DB config (NOT `schema.prisma`)             |
 | Database      | PostgreSQL via `@prisma/adapter-pg`                                                |
 | Real-time     | SSE (Server-Sent Events) via App Router Route Handler                              |
@@ -57,13 +58,20 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ### Server Actions
 
 - All actions in `src/lib/actions.ts` with `"use server"` at top
-- Use `useActionState` (React 19) on client forms — not the old `useFormState`
+- Call server actions directly from `handleSubmit` — do **not** use `useActionState` for forms managed by react-hook-form
+
+### Client Forms
+
+- Use `react-hook-form` + `zod` + shadcn `Form` / `FormField` / `FormItem` / `FormLabel` / `FormControl` / `FormMessage`
+- **Resolver**: import from `@hookform/resolvers/standard-schema` (not `@hookform/resolvers/zod`) — `zodResolver` is incompatible with Zod v4; use `standardSchemaResolver` instead
+- File inputs (e.g. slip upload) that need base64 conversion are handled outside RHF with a plain `Label` + `Input` + manual `useState`; validate size before encoding and surface errors via a local state string
 
 ### Illustrations
 
 - Inline SVG React components in `src/components/illustrations/`
 - All use `stroke="currentColor"` `fill="none"` — color via Tailwind `text-*` classes
 - No third-party icon/illustration libraries for custom art
+- Current illustrations: `Logo`, `MicrophoneIllustration`, `MusicNoteIllustration`, `QrFrameIllustration`, `SuccessIllustration`
 
 ## Project Structure
 
@@ -84,8 +92,9 @@ src/
 │   ├── ui/                      # shadcn components
 │   ├── illustrations/           # SVG line-art components
 │   ├── DashboardClient.tsx      # "use client" — SSE consumer + QR modal
+│   ├── HomeTabs.tsx             # "use client" — musician/customer tabs on landing
 │   ├── RequestCard.tsx          # "use client" — single request card + status buttons
-│   ├── RequestForm.tsx          # "use client" — customer form, slip→base64
+│   ├── RequestForm.tsx          # "use client" — RHF+zod form, slip→base64
 │   └── RoomCodeEntry.tsx        # "use client" — room code input on landing page
 └── lib/
     ├── actions.ts               # Server Actions (createRoom, submitSongRequest, etc.)
@@ -130,7 +139,7 @@ model SongRequest {
 
 - **Style**: Minimal, line-art / vector illustration aesthetic
 - **Primary color**: Single accent (`--primary` from shadcn mist theme — violet)
-- **Font**: Prompt — rounded, friendly, full Thai support
+- **Font**: IBM Plex Sans Thai — full Thai support, loaded as `--font-sans`
 - **Mono**: Geist Mono — used for room codes (`font-mono tracking-widest`)
-- **Components**: shadcn only — Card, Input, Label, Badge, Dialog, Separator, Textarea, Sonner, Button
+- **Components**: shadcn only — Card, Input, Label, Badge, Dialog, Separator, Textarea, Sonner, Button, Tabs, Form
 - **Illustrations**: `text-primary` for accent, `text-muted-foreground` for secondary positions

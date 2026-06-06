@@ -1,19 +1,29 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import QRCode from "react-qr-code"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { MusicNoteIllustration } from "@/components/illustrations/MusicNoteIllustration"
-import { QrFrameIllustration } from "@/components/illustrations/QrFrameIllustration"
-import { RequestCard } from "@/components/RequestCard"
-import { SongRequest } from "@prisma/client"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import QRCode from "react-qr-code";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { MusicNoteIllustration } from "@/components/illustrations/MusicNoteIllustration";
+import { QrFrameIllustration } from "@/components/illustrations/QrFrameIllustration";
+import { RequestCard } from "@/components/RequestCard";
+import { closeRoom } from "@/lib/actions";
+import { SongRequest } from "@prisma/client";
+
+const ROOM_KEY = "musician_room_code";
 
 interface DashboardClientProps {
-  code: string
-  requestUrl: string
-  initialRequests: SongRequest[]
+  code: string;
+  requestUrl: string;
+  initialRequests: SongRequest[];
 }
 
 export function DashboardClient({
@@ -21,39 +31,58 @@ export function DashboardClient({
   requestUrl,
   initialRequests,
 }: DashboardClientProps) {
-  const [requests, setRequests] = useState<SongRequest[]>(initialRequests)
+  const router = useRouter();
+  const [requests, setRequests] = useState<SongRequest[]>(initialRequests);
+  const [confirmClose, setConfirmClose] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
-    const es = new EventSource(`/api/room/${code}/events`)
+    localStorage.setItem(ROOM_KEY, code);
+  }, [code]);
+
+  useEffect(() => {
+    const es = new EventSource(`/api/room/${code}/events`);
 
     es.onmessage = (e) => {
       const msg = JSON.parse(e.data) as {
-        type: "snapshot" | "added" | "updated"
-        requests: SongRequest[]
-      }
+        type: "snapshot" | "added" | "updated";
+        requests: SongRequest[];
+      };
 
       if (msg.type === "snapshot") {
-        setRequests(msg.requests)
+        setRequests(msg.requests);
       } else if (msg.type === "added") {
-        setRequests((prev) => [...msg.requests, ...prev])
+        setRequests((prev) => [...msg.requests, ...prev]);
       } else if (msg.type === "updated") {
         setRequests((prev) =>
           prev.map((r) => {
-            const updated = msg.requests.find((u) => u.id === r.id)
-            return updated ?? r
-          })
-        )
+            const updated = msg.requests.find((u) => u.id === r.id);
+            return updated ?? r;
+          }),
+        );
       }
+    };
+
+    return () => es.close();
+  }, [code]);
+
+  async function handleCloseRoom() {
+    setIsClosing(true);
+    const result = await closeRoom(code);
+    if ("success" in result) {
+      localStorage.removeItem(ROOM_KEY);
+      router.push("/");
+    } else {
+      setIsClosing(false);
+      setConfirmClose(false);
     }
+  }
 
-    return () => es.close()
-  }, [code])
-
-  const pending = requests.filter((r) => r.status === "PENDING")
-  const playing = requests.filter((r) => r.status === "PLAYING")
+  const pending = requests.filter((r) => r.status === "PENDING");
+  const playing = requests.filter((r) => r.status === "PLAYING");
   const done = requests.filter(
-    (r) => r.status === "DONE" || r.status === "REJECTED"
-  )
+    (r) => r.status === "DONE" || r.status === "REJECTED",
+  );
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-lg mx-auto px-4 py-8">
@@ -68,28 +97,65 @@ export function DashboardClient({
           </p>
         </div>
 
-        {/* QR Code Dialog */}
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">
-              QR Code
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="flex flex-col items-center gap-4 p-6 max-w-xs">
-            <p className="text-sm text-muted-foreground">
-              ให้ลูกค้าสแกนเพื่อขอเพลง
-            </p>
-            <div className="relative flex items-center justify-center">
-              <QrFrameIllustration className="absolute inset-0 w-full h-full text-primary opacity-40" />
-              <div className="p-4">
-                <QRCode value={requestUrl} size={180} />
+        <div className="flex items-center gap-2">
+          {/* QR Code Dialog */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm">
+                QR Code
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="flex flex-col items-center gap-4 p-6 max-w-xs">
+              <DialogHeader>
+                <DialogTitle>
+                  <p className="text-sm text-muted-foreground">
+                    ให้ลูกค้าสแกนเพื่อขอเพลง
+                  </p>
+                </DialogTitle>
+              </DialogHeader>
+              <div className="relative flex items-center justify-center">
+                <QrFrameIllustration className="absolute inset-0 w-full h-full text-primary opacity-40" />
+                <div className="p-4">
+                  <QRCode value={requestUrl} size={180} />
+                </div>
               </div>
+              <p className="font-mono text-lg font-bold tracking-widest text-primary">
+                {code}
+              </p>
+            </DialogContent>
+          </Dialog>
+
+          {/* Close Room */}
+          {confirmClose ? (
+            <div className="flex items-center gap-1">
+              <Button
+                size="sm"
+                variant="destructive"
+                disabled={isClosing}
+                onClick={handleCloseRoom}
+              >
+                {isClosing ? "กำลังปิด..." : "ยืนยัน"}
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                disabled={isClosing}
+                onClick={() => setConfirmClose(false)}
+              >
+                ยกเลิก
+              </Button>
             </div>
-            <p className="font-mono text-lg font-bold tracking-widest text-primary">
-              {code}
-            </p>
-          </DialogContent>
-        </Dialog>
+          ) : (
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-muted-foreground hover:text-destructive"
+              onClick={() => setConfirmClose(true)}
+            >
+              ปิดห้อง
+            </Button>
+          )}
+        </div>
       </div>
 
       <Separator />
@@ -134,5 +200,5 @@ export function DashboardClient({
         </section>
       )}
     </div>
-  )
+  );
 }

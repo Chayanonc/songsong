@@ -1,11 +1,10 @@
 "use server"
 
 import { nanoid } from "nanoid"
-import { redirect } from "next/navigation"
 import { prisma } from "./prisma"
 import { RequestStatus } from "@prisma/client"
 
-export async function createRoom(): Promise<never> {
+export async function createRoom(): Promise<{ code: string }> {
   let code: string | null = null
   for (let attempt = 0; attempt < 3; attempt++) {
     const candidate = nanoid(6).toUpperCase()
@@ -24,7 +23,7 @@ export async function createRoom(): Promise<never> {
     },
   })
 
-  redirect(`/room/${code}`)
+  return { code }
 }
 
 export async function validateRoomCode(

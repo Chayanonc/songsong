@@ -1,8 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { MicrophoneIllustration } from "@/components/illustrations/MicrophoneIllustration";
-import { RoomCodeEntry } from "@/components/RoomCodeEntry";
-import { createRoom } from "@/lib/actions";
+import { HomeTabs } from "@/components/HomeTabs";
 
 export default function Home() {
   return (
@@ -17,35 +14,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Create Room */}
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle className="text-base">นักดนตรี</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              สร้างห้องรับคำขอเพลง แชร์ QR code ให้ลูกค้า
-            </p>
-            <form action={createRoom}>
-              <Button type="submit" className="w-full">
-                สร้างห้องใหม่
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Join Room */}
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle className="text-base">ลูกค้า</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              ใส่รหัสห้อง 6 ตัวที่ได้จากนักดนตรี
-            </p>
-            <RoomCodeEntry />
-          </CardContent>
-        </Card>
+        <HomeTabs />
       </div>
     </div>
   );

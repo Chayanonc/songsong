@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <ellipse cx="15" cy="50" rx="11" ry="7" transform="rotate(-20 15 50)" stroke="oklch(0.488 0.243 264.376)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="24" y1="47" x2="24" y2="18" stroke="oklch(0.488 0.243 264.376)" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="40" cy="44" rx="11" ry="7" transform="rotate(-20 40 44)" stroke="oklch(0.488 0.243 264.376)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="49" y1="41" x2="49" y2="12" stroke="oklch(0.488 0.243 264.376)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="24" y1="18" x2="49" y2="12" stroke="oklch(0.488 0.243 264.376)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="57" cy="22" r="2.5" fill="oklch(0.488 0.243 264.376)"/>
+  <circle cx="60" cy="33" r="2" fill="oklch(0.488 0.243 264.376)"/>
+  <circle cx="7" cy="28" r="2" fill="oklch(0.488 0.243 264.376)"/>
+</svg>
