@@ -17,6 +17,13 @@ import {
 } from "@/components/ui/form";
 import { SuccessIllustration } from "@/components/illustrations/SuccessIllustration";
 import { submitSongRequest } from "@/lib/actions";
+import {
+  IconCoin,
+  IconHash,
+  IconMicrophone,
+  IconMusic,
+  IconUser,
+} from "@tabler/icons-react";
 
 const schema = z.object({
   songName: z.string().min(1, "กรุณาใส่ชื่อเพลง"),
@@ -68,19 +75,28 @@ export function RequestForm({ roomCode }: RequestFormProps) {
 
   if (success) {
     return (
-      <div className="flex flex-col items-center gap-4 py-12 text-center">
-        <SuccessIllustration className="w-28 h-28 text-primary" />
-        <h2 className="text-xl font-semibold">ส่งคำขอแล้ว!</h2>
-        <p className="text-sm text-muted-foreground">รอฟังเพลงของคุณได้เลย</p>
+      <div className="flex flex-col items-center gap-6 py-10 px-6 text-center bg-card border border-border/80 rounded-2xl shadow-md shadow-primary/[0.01] animate-fade-in">
+        <div className="p-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          <SuccessIllustration className="w-16 h-16" />
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-xl font-bold tracking-tight">
+            ส่งคำขอเพลงเรียบร้อยแล้ว!
+          </h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            คำขอเพลงของคุณถูกส่งไปยังนักดนตรีแล้ว เตรียมรอฟังได้เลย
+          </p>
+        </div>
         <Button
           variant="outline"
+          className="w-full h-10 rounded-xl font-medium text-xs border-border hover:bg-muted cursor-pointer transition-colors mt-2"
           onClick={() => {
             setSuccess(false);
             setServerError("");
             form.reset();
           }}
         >
-          ขอเพลงอีกเพลง
+          ขอเพลงเพิ่มอีก
         </Button>
       </div>
     );
@@ -90,119 +106,193 @@ export function RequestForm({ roomCode }: RequestFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-5 bg-card border border-border/80 p-5 rounded-2xl shadow-sm"
       >
-        <FormField
-          control={form.control}
-          name="songName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                ชื่อเพลง <span className="text-destructive">*</span>
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="เช่น ดาวที่เหนือกว่า" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Group 1: Song Info */}
+        <div className="flex flex-col gap-4">
+          <FormField
+            control={form.control}
+            name="songName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                  <IconMusic className="w-3.5 h-3.5 text-primary" />
+                  ชื่อเพลง <span className="text-destructive">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="เช่น ดาวที่เหนือกว่า, สลักจิต"
+                    {...field}
+                    className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="bandName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                วง / ศิลปิน{" "}
-                <span className="text-muted-foreground text-xs font-normal">
-                  (optional)
-                </span>
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="เช่น Bodyslam" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="bandName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                  <IconMicrophone className="w-3.5 h-3.5 text-muted-foreground/70" />
+                  วง / ศิลปิน
+                  <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
+                    (ถ้ามี)
+                  </span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="เช่น Bodyslam, Tilly Birds"
+                    {...field}
+                    className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-        <Separator />
+        <Separator className="opacity-60" />
 
-        <FormField
-          control={form.control}
-          name="customerName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                ชื่อผู้ขอ{" "}
-                <span className="text-muted-foreground text-xs font-normal">
-                  (optional)
-                </span>
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="เช่น น้องหนู" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Group 2: User details & Tip */}
+        <div className="flex flex-col gap-4">
+          <FormField
+            control={form.control}
+            name="customerName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                  <IconUser className="w-3.5 h-3.5 text-muted-foreground/70" />
+                  ชื่อผู้ขอ
+                  <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
+                    (ไม่บังคับ)
+                  </span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="เช่น ชื่อเล่นของคุณ"
+                    {...field}
+                    className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="tableNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                โต๊ะ{" "}
-                <span className="text-muted-foreground text-xs font-normal">
-                  (optional)
-                </span>
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="เช่น A3" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="tableNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                  <IconHash className="w-3.5 h-3.5 text-muted-foreground/70" />
+                  โต๊ะ
+                  <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
+                    (ไม่บังคับ)
+                  </span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="เช่น A3, 12"
+                    {...field}
+                    className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="tipAmount"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                ทิป (บาท){" "}
-                <span className="text-muted-foreground text-xs font-normal">
-                  (optional)
-                </span>
-              </FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  min="0"
-                  step="1"
-                  placeholder="เช่น 100"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="tipAmount"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                  <IconCoin className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500/10" />
+                  ทิปสนับสนุนนักดนตรี (บาท)
+                  <span className="text-[10px] text-muted-foreground/50 font-normal ml-1">
+                    (ไม่บังคับ)
+                  </span>
+                </FormLabel>
+                <FormControl>
+                  <div className="flex flex-col gap-2">
+                    <Input
+                      type="number"
+                      min="0"
+                      step="1"
+                      placeholder="ระบุจำนวนเงินที่ต้องการทิป"
+                      {...field}
+                      className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background font-mono"
+                    />
+
+                    {/* Quick Tip Selection */}
+                    <div className="flex gap-2 mt-1">
+                      {["20", "50", "100", "200"].map((amount) => {
+                        const isSelected = form.watch("tipAmount") === amount;
+                        return (
+                          <Button
+                            key={amount}
+                            type="button"
+                            variant={isSelected ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => {
+                              if (isSelected) {
+                                form.setValue("tipAmount", "");
+                              } else {
+                                form.setValue("tipAmount", amount);
+                              }
+                            }}
+                            className={`flex-1 h-8 rounded-lg text-xs font-semibold cursor-pointer transition-all duration-200 ${
+                              isSelected
+                                ? "bg-primary text-primary-foreground border-primary shadow-sm scale-95"
+                                : "hover:bg-primary/5 hover:text-primary hover:border-primary/30 border-border text-muted-foreground"
+                            }`}
+                          >
+                            ฿{amount}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         {serverError && (
-          <p className="text-sm text-destructive text-center">{serverError}</p>
+          <p className="text-sm text-destructive text-center font-medium mt-1">
+            {serverError}
+          </p>
         )}
-
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-          className="w-full"
-        >
-          {form.formState.isSubmitting ? "กำลังส่ง..." : "ขอเพลง"}
-        </Button>
+        <div className="flex flex-col gap-2">
+          <Button
+            type="submit"
+            disabled={form.formState.isSubmitting}
+            className="w-full h-11 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/15 active:scale-98 mt-2"
+          >
+            {form.formState.isSubmitting
+              ? "กำลังส่งคำขอเพลง..."
+              : "ส่งคำขอเพลง"}
+          </Button>
+          <Button
+            variant="outline"
+            type="button"
+            onClick={() => {
+              window.location.href = "/";
+            }}
+            className="w-full h-11 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer shadow-sm"
+          >
+            กลับหน้าแรก
+          </Button>
+        </div>
       </form>
     </Form>
   );
