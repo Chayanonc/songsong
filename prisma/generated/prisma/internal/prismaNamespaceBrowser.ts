@@ -75,7 +75,12 @@ export const RoomScalarFieldEnum = {
   id: 'id',
   code: 'code',
   createdAt: 'createdAt',
-  expiresAt: 'expiresAt'
+  expiresAt: 'expiresAt',
+  musicianName: 'musicianName',
+  bankName: 'bankName',
+  bankAccount: 'bankAccount',
+  bankAccountName: 'bankAccountName',
+  paymentQrBase64: 'paymentQrBase64'
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]

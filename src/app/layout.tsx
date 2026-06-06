@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 const ibmPlexSansThai = IBM_Plex_Sans_Thai({
   subsets: ["thai"],
   weight: ["200", "300", "400", "500", "600", "700"],
-  variable: "--font-sans",
+  variable: "--font-ibm-plex",
 });
 
 const geistMono = Geist_Mono({

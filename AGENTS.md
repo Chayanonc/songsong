@@ -77,26 +77,28 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ```
 src/
 ├── app/
-│   ├── layout.tsx               # Root layout — Prompt font, <Toaster />
+│   ├── layout.tsx               # Root layout — IBM Plex Sans Thai font, <Toaster />
 │   ├── page.tsx                 # Landing — create room / enter room code
 │   ├── not-found.tsx            # Global 404 page
 │   ├── room/[code]/
 │   │   ├── layout.tsx           # Validates room exists (notFound() if expired)
-│   │   ├── page.tsx             # Musician dashboard (SSE real-time)
+│   │   ├── page.tsx             # Musician dashboard (SSE real-time) — passes room settings to DashboardClient
 │   │   └── request/
-│   │       └── page.tsx         # Customer song request form
+│   │       └── page.tsx         # Customer song request form + PaymentInfoCard (if payment info set)
 │   └── api/room/[code]/events/
 │       └── route.ts             # SSE endpoint — polls DB every 2s, pushes diffs
 ├── components/
 │   ├── ui/                      # shadcn components
 │   ├── illustrations/           # SVG line-art components
-│   ├── DashboardClient.tsx      # "use client" — SSE consumer + QR modal + QR download
+│   ├── DashboardClient.tsx      # "use client" — SSE consumer + QR modal + QR download + settings button
 │   ├── HomeTabs.tsx             # "use client" — musician/customer tabs on landing
+│   ├── PaymentInfoCard.tsx      # "use client" — payment QR + bank info card shown to customers
 │   ├── RequestCard.tsx          # "use client" — single request card + status buttons
 │   ├── RequestForm.tsx          # "use client" — RHF+zod song request form
-│   └── RoomCodeEntry.tsx        # "use client" — room code input on landing page
+│   ├── RoomCodeEntry.tsx        # "use client" — room code input on landing page
+│   └── RoomSettingsDialog.tsx   # "use client" — musician settings dialog (name, bank, payment QR upload)
 └── lib/
-    ├── actions.ts               # Server Actions (createRoom, submitSongRequest, etc.)
+    ├── actions.ts               # Server Actions (createRoom, submitSongRequest, updateRoomSettings, etc.)
     ├── prisma.ts                # Prisma singleton with PrismaPg adapter
     └── utils.ts                 # cn() helper
 
@@ -112,11 +114,16 @@ prisma/
 enum RequestStatus { PENDING, PLAYING, DONE, REJECTED }
 
 model Room {
-  id        String        @id @default(cuid())
-  code      String        @unique   // 6-char nanoid uppercase
-  createdAt DateTime      @default(now())
-  expiresAt DateTime                // now() + 24h on create
-  requests  SongRequest[]
+  id              String        @id @default(cuid())
+  code            String        @unique   // 6-char nanoid uppercase
+  createdAt       DateTime      @default(now())
+  expiresAt       DateTime                // now() + 24h on create
+  musicianName    String?                 // ชื่อนักดนตรี / วงดนตรี
+  bankName        String?                 // ชื่อธนาคาร
+  bankAccount     String?                 // เลขที่บัญชี
+  bankAccountName String?                 // ชื่อเจ้าของบัญชี (required when bankName/bankAccount set)
+  paymentQrBase64 String?                 // base64 JPEG ≤512px — client-resized before upload
+  requests        SongRequest[]
 
   @@index([code])
 }
@@ -137,6 +144,24 @@ model SongRequest {
   @@index([roomId, createdAt])
 }
 ```
+
+## Server Actions (`src/lib/actions.ts`)
+
+| Action | Description |
+| --- | --- |
+| `createRoom()` | สร้างห้องใหม่ คืน `{ code }` |
+| `validateRoomCode(code)` | ตรวจสอบว่าห้องยังใช้งานได้ |
+| `submitSongRequest(_, formData)` | ลูกค้าส่งคำขอเพลง |
+| `updateRequestStatus(id, status)` | นักดนตรีเปลี่ยนสถานะ request |
+| `updateRoomSettings(code, data)` | นักดนตรีบันทึกตั้งค่าห้อง (ชื่อ, บัญชี, QR) |
+| `closeRoom(code)` | ลบห้อง + cascade ลบ requests ทั้งหมด |
+
+## Payment / Settings Flow
+
+- นักดนตรีกดปุ่ม **ตั้งค่า** ใน dashboard → `RoomSettingsDialog` เปิดขึ้น
+- กรอก: ชื่อนักดนตรี, ธนาคาร, เลขบัญชี, ชื่อบัญชี (required ถ้ามีข้อมูลธนาคาร), อัปโหลด QR Code
+- รูป QR จะถูก **resize ≤512px + compress JPEG 85%** ใน browser ก่อนส่ง (หลีกเลี่ยง 1 MB Server Action limit)
+- ลูกค้าเปิดหน้า `/room/[code]/request` จะเห็น `PaymentInfoCard` แสดง QR + ข้อมูลบัญชี + ปุ่มคัดลอกเลขบัญชี
 
 ## Design System
 

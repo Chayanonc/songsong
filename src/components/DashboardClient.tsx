@@ -26,19 +26,30 @@ import {
   IconDownload,
   IconQrcode,
 } from "@tabler/icons-react";
+import { RoomSettingsDialog } from "@/components/RoomSettingsDialog";
 
 const ROOM_KEY = "musician_room_code";
+
+interface RoomSettings {
+  musicianName: string | null;
+  bankName: string | null;
+  bankAccount: string | null;
+  bankAccountName: string | null;
+  paymentQrBase64: string | null;
+}
 
 interface DashboardClientProps {
   code: string;
   requestUrl: string;
   initialRequests: SongRequest[];
+  initialSettings: RoomSettings;
 }
 
 export function DashboardClient({
   code,
   requestUrl,
   initialRequests,
+  initialSettings,
 }: DashboardClientProps) {
   const router = useRouter();
   const qrRef = useRef<HTMLDivElement>(null);
@@ -163,6 +174,9 @@ export function DashboardClient({
         </div>
 
         <div className="flex items-center gap-2 shrink-0 flex-wrap justify-end">
+          {/* Settings Dialog */}
+          <RoomSettingsDialog code={code} initialSettings={initialSettings} />
+
           {/* QR Code Dialog */}
           <Dialog>
             <DialogTrigger asChild>

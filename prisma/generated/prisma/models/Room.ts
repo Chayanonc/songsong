@@ -29,6 +29,11 @@ export type RoomMinAggregateOutputType = {
   code: string | null
   createdAt: Date | null
   expiresAt: Date | null
+  musicianName: string | null
+  bankName: string | null
+  bankAccount: string | null
+  bankAccountName: string | null
+  paymentQrBase64: string | null
 }
 
 export type RoomMaxAggregateOutputType = {
@@ -36,6 +41,11 @@ export type RoomMaxAggregateOutputType = {
   code: string | null
   createdAt: Date | null
   expiresAt: Date | null
+  musicianName: string | null
+  bankName: string | null
+  bankAccount: string | null
+  bankAccountName: string | null
+  paymentQrBase64: string | null
 }
 
 export type RoomCountAggregateOutputType = {
@@ -43,6 +53,11 @@ export type RoomCountAggregateOutputType = {
   code: number
   createdAt: number
   expiresAt: number
+  musicianName: number
+  bankName: number
+  bankAccount: number
+  bankAccountName: number
+  paymentQrBase64: number
   _all: number
 }
 
@@ -52,6 +67,11 @@ export type RoomMinAggregateInputType = {
   code?: true
   createdAt?: true
   expiresAt?: true
+  musicianName?: true
+  bankName?: true
+  bankAccount?: true
+  bankAccountName?: true
+  paymentQrBase64?: true
 }
 
 export type RoomMaxAggregateInputType = {
@@ -59,6 +79,11 @@ export type RoomMaxAggregateInputType = {
   code?: true
   createdAt?: true
   expiresAt?: true
+  musicianName?: true
+  bankName?: true
+  bankAccount?: true
+  bankAccountName?: true
+  paymentQrBase64?: true
 }
 
 export type RoomCountAggregateInputType = {
@@ -66,6 +91,11 @@ export type RoomCountAggregateInputType = {
   code?: true
   createdAt?: true
   expiresAt?: true
+  musicianName?: true
+  bankName?: true
+  bankAccount?: true
+  bankAccountName?: true
+  paymentQrBase64?: true
   _all?: true
 }
 
@@ -146,6 +176,11 @@ export type RoomGroupByOutputType = {
   code: string
   createdAt: Date
   expiresAt: Date
+  musicianName: string | null
+  bankName: string | null
+  bankAccount: string | null
+  bankAccountName: string | null
+  paymentQrBase64: string | null
   _count: RoomCountAggregateOutputType | null
   _min: RoomMinAggregateOutputType | null
   _max: RoomMaxAggregateOutputType | null
@@ -174,6 +209,11 @@ export type RoomWhereInput = {
   code?: Prisma.StringFilter<"Room"> | string
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   expiresAt?: Prisma.DateTimeFilter<"Room"> | Date | string
+  musicianName?: Prisma.StringNullableFilter<"Room"> | string | null
+  bankName?: Prisma.StringNullableFilter<"Room"> | string | null
+  bankAccount?: Prisma.StringNullableFilter<"Room"> | string | null
+  bankAccountName?: Prisma.StringNullableFilter<"Room"> | string | null
+  paymentQrBase64?: Prisma.StringNullableFilter<"Room"> | string | null
   requests?: Prisma.SongRequestListRelationFilter
 }
 
@@ -182,6 +222,11 @@ export type RoomOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  musicianName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccountName?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentQrBase64?: Prisma.SortOrderInput | Prisma.SortOrder
   requests?: Prisma.SongRequestOrderByRelationAggregateInput
 }
 
@@ -193,6 +238,11 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   expiresAt?: Prisma.DateTimeFilter<"Room"> | Date | string
+  musicianName?: Prisma.StringNullableFilter<"Room"> | string | null
+  bankName?: Prisma.StringNullableFilter<"Room"> | string | null
+  bankAccount?: Prisma.StringNullableFilter<"Room"> | string | null
+  bankAccountName?: Prisma.StringNullableFilter<"Room"> | string | null
+  paymentQrBase64?: Prisma.StringNullableFilter<"Room"> | string | null
   requests?: Prisma.SongRequestListRelationFilter
 }, "id" | "code">
 
@@ -201,6 +251,11 @@ export type RoomOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  musicianName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccountName?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentQrBase64?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RoomCountOrderByAggregateInput
   _max?: Prisma.RoomMaxOrderByAggregateInput
   _min?: Prisma.RoomMinOrderByAggregateInput
@@ -214,6 +269,11 @@ export type RoomScalarWhereWithAggregatesInput = {
   code?: Prisma.StringWithAggregatesFilter<"Room"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
+  musicianName?: Prisma.StringNullableWithAggregatesFilter<"Room"> | string | null
+  bankName?: Prisma.StringNullableWithAggregatesFilter<"Room"> | string | null
+  bankAccount?: Prisma.StringNullableWithAggregatesFilter<"Room"> | string | null
+  bankAccountName?: Prisma.StringNullableWithAggregatesFilter<"Room"> | string | null
+  paymentQrBase64?: Prisma.StringNullableWithAggregatesFilter<"Room"> | string | null
 }
 
 export type RoomCreateInput = {
@@ -221,6 +281,11 @@ export type RoomCreateInput = {
   code: string
   createdAt?: Date | string
   expiresAt: Date | string
+  musicianName?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountName?: string | null
+  paymentQrBase64?: string | null
   requests?: Prisma.SongRequestCreateNestedManyWithoutRoomInput
 }
 
@@ -229,6 +294,11 @@ export type RoomUncheckedCreateInput = {
   code: string
   createdAt?: Date | string
   expiresAt: Date | string
+  musicianName?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountName?: string | null
+  paymentQrBase64?: string | null
   requests?: Prisma.SongRequestUncheckedCreateNestedManyWithoutRoomInput
 }
 
@@ -237,6 +307,11 @@ export type RoomUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicianName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentQrBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requests?: Prisma.SongRequestUpdateManyWithoutRoomNestedInput
 }
 
@@ -245,6 +320,11 @@ export type RoomUncheckedUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicianName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentQrBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requests?: Prisma.SongRequestUncheckedUpdateManyWithoutRoomNestedInput
 }
 
@@ -253,6 +333,11 @@ export type RoomCreateManyInput = {
   code: string
   createdAt?: Date | string
   expiresAt: Date | string
+  musicianName?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountName?: string | null
+  paymentQrBase64?: string | null
 }
 
 export type RoomUpdateManyMutationInput = {
@@ -260,6 +345,11 @@ export type RoomUpdateManyMutationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicianName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentQrBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RoomUncheckedUpdateManyInput = {
@@ -267,6 +357,11 @@ export type RoomUncheckedUpdateManyInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicianName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentQrBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RoomCountOrderByAggregateInput = {
@@ -274,6 +369,11 @@ export type RoomCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  musicianName?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  bankAccount?: Prisma.SortOrder
+  bankAccountName?: Prisma.SortOrder
+  paymentQrBase64?: Prisma.SortOrder
 }
 
 export type RoomMaxOrderByAggregateInput = {
@@ -281,6 +381,11 @@ export type RoomMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  musicianName?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  bankAccount?: Prisma.SortOrder
+  bankAccountName?: Prisma.SortOrder
+  paymentQrBase64?: Prisma.SortOrder
 }
 
 export type RoomMinOrderByAggregateInput = {
@@ -288,6 +393,11 @@ export type RoomMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
+  musicianName?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  bankAccount?: Prisma.SortOrder
+  bankAccountName?: Prisma.SortOrder
+  paymentQrBase64?: Prisma.SortOrder
 }
 
 export type RoomScalarRelationFilter = {
@@ -301,6 +411,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type RoomCreateNestedOneWithoutRequestsInput = {
@@ -322,6 +436,11 @@ export type RoomCreateWithoutRequestsInput = {
   code: string
   createdAt?: Date | string
   expiresAt: Date | string
+  musicianName?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountName?: string | null
+  paymentQrBase64?: string | null
 }
 
 export type RoomUncheckedCreateWithoutRequestsInput = {
@@ -329,6 +448,11 @@ export type RoomUncheckedCreateWithoutRequestsInput = {
   code: string
   createdAt?: Date | string
   expiresAt: Date | string
+  musicianName?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountName?: string | null
+  paymentQrBase64?: string | null
 }
 
 export type RoomCreateOrConnectWithoutRequestsInput = {
@@ -352,6 +476,11 @@ export type RoomUpdateWithoutRequestsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicianName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentQrBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RoomUncheckedUpdateWithoutRequestsInput = {
@@ -359,6 +488,11 @@ export type RoomUncheckedUpdateWithoutRequestsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicianName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentQrBase64?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -397,6 +531,11 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   code?: boolean
   createdAt?: boolean
   expiresAt?: boolean
+  musicianName?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountName?: boolean
+  paymentQrBase64?: boolean
   requests?: boolean | Prisma.Room$requestsArgs<ExtArgs>
   _count?: boolean | Prisma.RoomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
@@ -406,6 +545,11 @@ export type RoomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   code?: boolean
   createdAt?: boolean
   expiresAt?: boolean
+  musicianName?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountName?: boolean
+  paymentQrBase64?: boolean
 }, ExtArgs["result"]["room"]>
 
 export type RoomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -413,6 +557,11 @@ export type RoomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   code?: boolean
   createdAt?: boolean
   expiresAt?: boolean
+  musicianName?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountName?: boolean
+  paymentQrBase64?: boolean
 }, ExtArgs["result"]["room"]>
 
 export type RoomSelectScalar = {
@@ -420,9 +569,14 @@ export type RoomSelectScalar = {
   code?: boolean
   createdAt?: boolean
   expiresAt?: boolean
+  musicianName?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountName?: boolean
+  paymentQrBase64?: boolean
 }
 
-export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "createdAt" | "expiresAt", ExtArgs["result"]["room"]>
+export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "createdAt" | "expiresAt" | "musicianName" | "bankName" | "bankAccount" | "bankAccountName" | "paymentQrBase64", ExtArgs["result"]["room"]>
 export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requests?: boolean | Prisma.Room$requestsArgs<ExtArgs>
   _count?: boolean | Prisma.RoomCountOutputTypeDefaultArgs<ExtArgs>
@@ -440,6 +594,11 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     code: string
     createdAt: Date
     expiresAt: Date
+    musicianName: string | null
+    bankName: string | null
+    bankAccount: string | null
+    bankAccountName: string | null
+    paymentQrBase64: string | null
   }, ExtArgs["result"]["room"]>
   composites: {}
 }
@@ -868,6 +1027,11 @@ export interface RoomFieldRefs {
   readonly code: Prisma.FieldRef<"Room", 'String'>
   readonly createdAt: Prisma.FieldRef<"Room", 'DateTime'>
   readonly expiresAt: Prisma.FieldRef<"Room", 'DateTime'>
+  readonly musicianName: Prisma.FieldRef<"Room", 'String'>
+  readonly bankName: Prisma.FieldRef<"Room", 'String'>
+  readonly bankAccount: Prisma.FieldRef<"Room", 'String'>
+  readonly bankAccountName: Prisma.FieldRef<"Room", 'String'>
+  readonly paymentQrBase64: Prisma.FieldRef<"Room", 'String'>
 }
     
 

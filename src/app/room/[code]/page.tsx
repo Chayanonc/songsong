@@ -32,6 +32,13 @@ export default async function DashboardPage({
       code={upperCode}
       requestUrl={requestUrl}
       initialRequests={room.requests}
+      initialSettings={{
+        musicianName: room.musicianName,
+        bankName: room.bankName,
+        bankAccount: room.bankAccount,
+        bankAccountName: room.bankAccountName,
+        paymentQrBase64: room.paymentQrBase64,
+      }}
     />
   );
 }

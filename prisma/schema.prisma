@@ -20,11 +20,16 @@ enum RequestStatus {
 }
 
 model Room {
-  id        String        @id @default(cuid())
-  code      String        @unique
-  createdAt DateTime      @default(now())
-  expiresAt DateTime
-  requests  SongRequest[]
+  id              String        @id @default(cuid())
+  code            String        @unique
+  createdAt       DateTime      @default(now())
+  expiresAt       DateTime
+  musicianName     String?
+  bankName         String?
+  bankAccount      String?
+  bankAccountName  String?
+  paymentQrBase64  String?
+  requests        SongRequest[]
 
   @@index([code])
 }

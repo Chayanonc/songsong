@@ -513,10 +513,6 @@ export type SongRequestUncheckedUpdateManyWithoutRoomNestedInput = {
   deleteMany?: Prisma.SongRequestScalarWhereInput | Prisma.SongRequestScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number

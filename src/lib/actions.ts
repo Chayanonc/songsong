@@ -105,3 +105,32 @@ export async function closeRoom(
     return { error: "ไม่สามารถปิดห้องได้" };
   }
 }
+
+export async function updateRoomSettings(
+  code: string,
+  data: {
+    musicianName?: string;
+    bankName?: string;
+    bankAccount?: string;
+    bankAccountName?: string;
+    paymentQrBase64?: string | null;
+  },
+): Promise<{ success: boolean } | { error: string }> {
+  try {
+    await prisma.room.update({
+      where: { code: code.toUpperCase() },
+      data: {
+        musicianName: data.musicianName?.trim() || null,
+        bankName: data.bankName?.trim() || null,
+        bankAccount: data.bankAccount?.trim() || null,
+        bankAccountName: data.bankAccountName?.trim() || null,
+        ...(data.paymentQrBase64 !== undefined && {
+          paymentQrBase64: data.paymentQrBase64,
+        }),
+      },
+    });
+    return { success: true };
+  } catch {
+    return { error: "ไม่สามารถบันทึกการตั้งค่าได้" };
+  }
+}

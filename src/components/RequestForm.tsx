@@ -228,7 +228,7 @@ export function RequestForm({ roomCode }: RequestFormProps) {
                       step="1"
                       placeholder="ระบุจำนวนเงินที่ต้องการทิป"
                       {...field}
-                      className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background font-mono"
+                      className="rounded-xl h-10 border-border focus-visible:ring-primary/20 bg-background"
                     />
 
                     {/* Quick Tip Selection */}
