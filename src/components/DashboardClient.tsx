@@ -10,6 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -54,7 +56,7 @@ export function DashboardClient({
   const router = useRouter();
   const qrRef = useRef<HTMLDivElement>(null);
   const [requests, setRequests] = useState<SongRequest[]>(initialRequests);
-  const [confirmClose, setConfirmClose] = useState(false);
+  const [closeDialogOpen, setCloseDialogOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
@@ -95,7 +97,7 @@ export function DashboardClient({
       router.push("/");
     } else {
       setIsClosing(false);
-      setConfirmClose(false);
+      setCloseDialogOpen(false);
     }
   }
 
@@ -225,38 +227,52 @@ export function DashboardClient({
           </Dialog>
 
           {/* Close Room */}
-          {confirmClose ? (
-            <div className="flex items-center gap-1 bg-destructive/5 border border-destructive/20 rounded-lg p-1 animate-fade-in">
+          <Dialog open={closeDialogOpen} onOpenChange={setCloseDialogOpen}>
+            <DialogTrigger asChild>
               <Button
                 size="sm"
-                variant="destructive"
-                disabled={isClosing}
-                onClick={handleCloseRoom}
-                className="h-8 rounded-md text-xs font-medium cursor-pointer"
+                variant="outline"
+                className="text-muted-foreground border-border hover:bg-destructive/5 hover:text-destructive hover:border-destructive/20 h-9 px-3 rounded-lg text-xs font-medium cursor-pointer transition-colors gap-1.5"
               >
-                {isClosing ? "กำลังปิด..." : "ยืนยัน"}
+                <IconDoorExit className="w-4 h-4" />
+                <span className="hidden sm:inline">ปิดห้อง</span>
               </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                disabled={isClosing}
-                onClick={() => setConfirmClose(false)}
-                className="h-8 rounded-md text-xs font-medium cursor-pointer"
-              >
-                ยกเลิก
-              </Button>
-            </div>
-          ) : (
-            <Button
-              size="sm"
-              variant="outline"
-              className="text-muted-foreground border-border hover:bg-destructive/5 hover:text-destructive hover:border-destructive/20 h-9 px-3 rounded-lg text-xs font-medium cursor-pointer transition-colors gap-1.5"
-              onClick={() => setConfirmClose(true)}
-            >
-              <IconDoorExit className="w-4 h-4" />
-              <span className="hidden sm:inline">ปิดห้อง</span>
-            </Button>
-          )}
+            </DialogTrigger>
+            <DialogContent className="max-w-xs rounded-2xl p-6 gap-4">
+              <DialogHeader>
+                <DialogTitle className="text-base font-semibold">
+                  ปิดห้องนี้?
+                </DialogTitle>
+                <DialogDescription className="text-sm text-muted-foreground">
+                  คำขอเพลงทั้งหมดในห้อง{" "}
+                  <span className="font-mono font-bold text-foreground">
+                    {code}
+                  </span>{" "}
+                  จะถูกลบถาวร และลูกค้าจะไม่สามารถเข้าห้องนี้ได้อีก
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter className="flex-row gap-2 sm:justify-end">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={isClosing}
+                  onClick={() => setCloseDialogOpen(false)}
+                  className="flex-1 sm:flex-none cursor-pointer"
+                >
+                  ยกเลิก
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  disabled={isClosing}
+                  onClick={handleCloseRoom}
+                  className="flex-1 sm:flex-none cursor-pointer"
+                >
+                  {isClosing ? "กำลังปิด..." : "ปิดห้อง"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
